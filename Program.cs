@@ -5,7 +5,22 @@ class Program
     static void Main(string[] args)
     {
         KodeProduk kodeProduk = new KodeProduk();
-        Console.Out.WriteLine(kodeProduk.getKodeProduk("Laptop"));
+        Console.Write("Kode produk untuk Laptop : ");
+        Console.WriteLine(kodeProduk.getKodeProduk("Laptop"));
+        Console.Write("Kode produk untuk Smartwatch : ");
+        Console.WriteLine(kodeProduk.getKodeProduk("Smartwatch"));
+        Console.Write("Kode produk untuk Mouse : ");
+        Console.WriteLine(kodeProduk.getKodeProduk("Mouse"));
+
+        FanLaptop fan = new FanLaptop();
+        Console.WriteLine("Mode up..");
+        fan.modeUp();
+        Console.WriteLine("Mode up..");
+        fan.modeUp();
+        Console.WriteLine("Mode up..");
+        fan.modeUp();
+        Console.WriteLine("Turbo shortcut");
+        fan.turboShortcut();
     }
 }
 
@@ -29,5 +44,44 @@ class KodeProduk
         };
 
         return kodeProduk.GetValueOrDefault(produk);
+    }
+}
+
+class FanLaptop
+{
+    int stateFan = 0;
+
+    string[] modes = { "Quiet", "Balanced", "Performance", "Turbo" };
+
+    public void modeUp()
+    {
+
+        if (stateFan < 3)
+        {
+            string beforeState = modes[stateFan];
+            stateFan++;
+            Console.WriteLine("Fan " + beforeState + " berubah menjadi " + modes[stateFan]);
+        }
+    }
+    public void modeDown()
+    {
+        if (stateFan > 0)
+        {
+            string beforeState = modes[stateFan];
+            stateFan--;
+            Console.WriteLine("Fan " + beforeState + " berubah menjadi " + modes[stateFan]);
+        }
+    }
+    public void turboShortcut()
+    {
+        string beforeState = modes[stateFan];
+        if (stateFan == 0)
+        {
+            stateFan = 3;
+        } else
+        {
+            stateFan = 0;
+        }
+        Console.WriteLine("Fan " + beforeState + " berubah menjadi " + modes[stateFan]);
     }
 }
